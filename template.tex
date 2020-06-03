@@ -28,8 +28,8 @@ $endif$
 
 % converts LaTeX specials (quotes, dashes etc.) to Unicode
 \defaultfontfeatures{Mapping=tex-text}
-\setromanfont [Ligatures={Common}, Numbers={OldStyle}]{$seriffont$}
-\setsansfont[Scale=0.9]{$sansfont$}
+%\setromanfont [Ligatures={Common}, Numbers={OldStyle}]{$seriffont$}
+%\setsansfont[Scale=0.9]{$sansfont$}
 
 % Set paragraph break
 \setlength{\parskip}{1em}
@@ -75,8 +75,8 @@ $endif$
 \hypersetup
 {
   pdfauthor=$author$,
-  pdfsubject=Invoice Nr. $invoice-nr$,
-  pdftitle=Invoice Nr. $invoice-nr$,
+  pdfsubject=$title$,
+  pdftitle=$title$,
   linkcolor=blue,
   citecolor=blue,
   filecolor=black,
@@ -109,31 +109,35 @@ $endfor$
 
 \begin{flushright}
   \small
-  $city$, \today
+	$city$, $if(date)$$date$$else$\today$endif$
 \end{flushright}
 
 \vspace{1em}
 
 
-\section*{\textsc{Invoice} \textsc{\#$invoice-nr$}}
+\section*{$title$}
 \footnotesize
 \newcounter{pos}
 \setcounter{pos}{0}
 \STautoround*{2} % Get spreadtab to always display the decimal part
 $if(commasep)$\STsetdecimalsep{,}$endif$ % Use comma as decimal separator
 
-\begin{spreadtab}{{tabular}[t t t]{lp{8.2cm}r}}
+\begin{spreadtab}{{tabular}[t t t]{lp{10.7cm}r}}
   \hdashline[1pt/1pt]
-  @ \noalign{\vskip 2mm} \textbf{Pos.} & @ \textbf{Description} & @ \textbf{Prices in $currency$} \\ \hline
+  @ \noalign{\vskip 2mm} \textbf{$label-position$} & @ \textbf{$label-description$} & @ \textbf{$label-price$} \\ \hline
       $for(service)$ @ \noalign{\vskip 2mm} \refstepcounter{pos} \thepos 
         & @ $service.description$ 
         $if(service.details)$\newline \begin{itemize} 
           $for(service.details)$\scriptsize \item $service.details$ 
           $endfor$ \end{itemize}
           $endif$ & $service.price$\\$endfor$ \noalign{\vskip 2mm} \hline
-  @ & @ \multicolumn{1}{r}{Subtotal:}                & :={sum(c1:[0,-1])} \\ \hhline{~~-}
-  @ & @ \multicolumn{1}{r}{VAT $VAT$\%:}               & $VAT$/100*[0,-1] \\ \hhline{~~-}
-  @ & @ \multicolumn{1}{r}{\textbf{Total:}}   & \textbf{:={[0,-1]+[0,-2]}} \\ \hhline{~~-}
+  $if(VAT)$
+    @ & @ \multicolumn{1}{r}{$label-subtotal$}                & :={sum(c1:[0,-1])} \\ \hhline{~~-}
+    @ & @ \multicolumn{1}{r}{$label-vat$ $VAT$\%:}               & $VAT$/100*[0,-1] \\ \hhline{~~-}
+		@ & @ \multicolumn{1}{r}{\textbf{$label-total$}}   & \textbf{:={[0,-1]+[0,-2]}} \\ \hhline{~~-}
+  $else$
+		@ & @ \multicolumn{1}{r}{\textbf{$label-total$}}   & \textbf{:={sum(c1:[0,-1])} } \\ \hhline{~~-}
+  $endif$
 \end{spreadtab}
 
 \vspace{15mm}
