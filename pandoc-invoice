@@ -7,4 +7,4 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 BOILERPLATE_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-pandoc $@ $BOILERPLATE_DIR/base.yml -o output.pdf --template=$BOILERPLATE_DIR/template.tex --latex-engine=xelatex
+pandoc $BOILERPLATE_DIR/base.yml $@ -o output.pdf --template=$BOILERPLATE_DIR/template.tex --pdf-engine=xelatex
