@@ -62,7 +62,7 @@ To install pandoc on Mac OS X, run `brew install pandoc`. To install it on Linux
 
 Although I didn't test it, you can probably use this on Windows, too. Both [Pandoc](http://pandoc.org/installing.html) and LaTeX can be installed on Windows (I recommend [MiKTeX](http://miktex.org/) for that) and you should be able to run makefiles on Windows through [Cygwin](https://www.cygwin.com/). If that's too much hassle, this command should do the trick in Powershell:
 
-    pandoc details.yml -o output.pdf --template=template.tex --latex-engine=xelatex
+    pandoc details.yml -o output.pdf --template=template.tex --pdf-engine=xelatex
 
 ## Available settings
 
@@ -71,10 +71,10 @@ Although I didn't test it, you can probably use this on Windows, too. Both [Pand
 - **`commasep`**: Set to `true` to use a comma as decimal separator. This is for display purposes only—remember to always use a dot to set the prices in your YAML file.
 - **`lang`**: Sets the main language through the `polyglossia` package. This is important for proper hyphenation and date format.
 - **`seriffont`**: Used for the heading and the sender address. Hoefler Text is the default, but every font installed on your system should work out of the box (thanks, XeTeX!)
-- **`sansfont`**: Used to render the recipient address, the table and the final note. Defaults to Helvetica Neue.
+- **`sansfont`**: Used to render the recipient address, the table and the closing note. Defaults to Helvetica Neue.
 - **`fontsize`**: Possible values here are 10pt, 11pt and 12pt.
 - **`geometry`**: A string that sets the margins through `geometry`. Read [this](https://www.sharelatex.com/learn/Page_size_and_margins) to learn how this package works.
-- **`finalnote`**: This gets printed after the table as a closing note. Use it to provide your bank details and a thank you message.
+- **`closingnote`**: This gets printed after the table as a closing note. Use it to provide your bank details and a thank you message.
 - **`letterhead`**: include custom letterhead in the PDF (see below).
 
 ## Custom letterhead
@@ -85,12 +85,15 @@ If you have already designed your own letterhead and want to use it with this te
 
 - [Typesetting Automation](http://mrzool.cc/writing/typesetting-automation/), my article about this project with in-depth instructions and some suggestions for an ideal workflow.
 - [Grids of Numbers Recommendations](http://practicaltypography.com/grids-of-numbers.html) on Butterick's Practical Typography
+- [Multichannel Text Processing](https://ia.net/topics/multichannel-text-processing/) by iA
 - [Why Microsoft Word must Die](http://www.antipope.org/charlie/blog-static/2013/10/why-microsoft-word-must-die.html) by Charlie Stross
+- [Word Processors: Stupid and Inefficient](http://ricardo.ecn.wfu.edu/~cottrell/wp.html) by Allin Cottrell
+- [Proprietary Binary Data Formats: Just Say No!](http://www.podval.org/~sds/data.html) by Sam Steingold
 - [The Beauty of LaTeX](http://nitens.org/taraborelli/latex) by Dario Taraborelli
 
 ## Resources
 
-- Refer to [pandoc's documentation](http://pandoc.org/demo/example9/templates.html) to learn more about how templates work.
+- Refer to [pandoc's documentation](http://pandoc.org/MANUAL.html#templates) to learn more about how templates work.
 - If you're not familiar with the YAML syntax, [here](http://learnxinyminutes.com/docs/yaml/)'s a good overview.
 - If you want to edit the template but LaTeX scares you, these [docs](https://www.sharelatex.com/learn/Main_Page) put together by ShareLaTeX cover most of the basics and are surprisingly kind to the beginner.
 - Odds are your question already has an answer on [TeX Stack Exchange](https://www.sharelatex.com/learn/Main_Page). Also, pretty friendly crowd in there.

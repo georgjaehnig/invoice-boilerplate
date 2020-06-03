@@ -1,6 +1,6 @@
 TEX = pandoc
-src = template.tex details.yml base.yml
-FLAGS = --latex-engine=xelatex
+src = template.tex details.yml
+FLAGS = --pdf-engine=xelatex
 
 output.pdf : $(src)
 	$(TEX) $(filter-out $<,$^ ) -o $@ --template=$< $(FLAGS)

@@ -74,7 +74,7 @@ $endif$
 \usepackage[xetex, bookmarks, colorlinks, breaklinks]{hyperref}
 \hypersetup
 {
-  pdfauthor=$author$,
+  pdfauthor={$author$},
   pdfsubject=$title$,
   pdftitle=$title$,
   linkcolor=blue,
@@ -139,6 +139,7 @@ $if(commasep)$\STsetdecimalsep{,}$endif$ % Use comma as decimal separator
 		@ & @ \multicolumn{1}{r}{\textbf{$label-total$}}   & \textbf{:={sum(c1:[0,-1])} } \\ \hhline{~~-}
   $endif$
 \end{spreadtab}
+
 
 \vspace{15mm}
 
